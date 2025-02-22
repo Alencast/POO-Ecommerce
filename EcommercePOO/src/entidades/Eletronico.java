@@ -1,50 +1,58 @@
 package entidades;
 
 public class Eletronico extends Produto {
-    private String marca;
-    private String modelo;
-    private int garantiaMeses;
 
-    public Eletronico(int id, String nome, double preco, int quantidadeEstoque, String marca, String modelo, int garantiaMeses) {
-        super(id, nome, preco, quantidadeEstoque);
-        this.marca = marca;
-        this.modelo = modelo;
-        this.garantiaMeses = garantiaMeses;
-    }
+	// atributos
+	private String marca;
+	private String modelo;
+	private int garantia;
 
-    @Override
-    public void exibirDetalhes() {
-        System.out.println("ID: " + getId());
-        System.out.println("Nome: " + getNome());
-        System.out.println("Preço: R$ " + getPreco());
-        System.out.println("Estoque: " + getQuantidadeEstoque());
-        System.out.println("Marca: " + marca);
-        System.out.println("Modelo: " + modelo);
-        System.out.println("Garantia: " + garantiaMeses + " meses");
-    }
+	// construtor
+	public Eletronico(int id, String nome, double preco, int quantidadeEstoque, String marca, String modelo,
+			int garantia) {
+		super(id, nome, preco, quantidadeEstoque);
 
-    // Getters e Setters
-    public String getMarca() {
-        return marca;
-    }
+		this.marca = marca;
+		this.modelo = modelo;
+		this.garantia = garantia;
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
+	}
 
-    public String getModelo() {
-        return modelo;
-    }
+	@Override
+	public void exibirDetalhes() {
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
+		System.out.println("Nome do produto: " + getNome());
+		System.out.println("Valor do produto: " + "R$" + getPreco());
+		System.out.println("Quantidade em estoque: " + getQuantidadeEstoque());
+		System.out.println("Marca do produto: " + getMarca());
+		System.out.println("Modelo do produto: " + getModelo());
+		System.out.println("Tempo de garantia: " + getGarantia() + "Meses");
 
-    public int getGarantiaMeses() {
-        return garantiaMeses;
-    }
+	}
 
-    public void setGarantiaMeses(int garantiaMeses) {
-        this.garantiaMeses = garantiaMeses;
-    }
+	// getters e setters
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public int getGarantia() {
+		return garantia;
+	}
+
+	public void setGarantia(int garantia) {
+		this.garantia = garantia;
+	}
+
 }

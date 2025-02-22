@@ -1,6 +1,8 @@
 package entidades;
 
 public interface Pagavel {
-    boolean processarPagamento(double valor);
-}
+boolean processarPagamento(double valor);
+    
 
+    
+}

@@ -1,6 +1,7 @@
 package entidades;
 
-public class PagamentoPix implements Pagavel {
+public class PagamentoPix implements Pagavel {  
+    
     private String chavePix;
 
     public PagamentoPix(String chavePix) {
