@@ -6,7 +6,7 @@ public class Pedido {
     private int id;
     private Date dataPedido;
     private double total;
-    private Cliente cliente; // Relação many to one com cliente.
+    private Cliente cliente; // Relação many to one com cliente
 
     public Pedido(int id, Date dataPedido, double total, Cliente cliente) {
         this.id = id;

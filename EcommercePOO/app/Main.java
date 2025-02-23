@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Criando alguns produtos eletrônicos
+        
         ArrayList<Produto> produtos = new ArrayList<>();
         produtos.add(new Eletronico(1, "Celular", 1500.00, 10, "Samsung", "Galaxy S21", 24));
         produtos.add(new Eletronico(2, "Notebook", 3000.00, 5, "Dell", "Inspiron 15", 12));
@@ -21,14 +21,14 @@ public class Main {
             System.out.println("=======================================");
             System.out.print("Você é Cliente ou Administrador? (C/A) (X para sair): ");
             char tipoUsuario = scanner.next().toUpperCase().charAt(0);
-            scanner.nextLine(); // Consumir nova linha
+            scanner.nextLine(); 
 
             if (tipoUsuario == 'C') {
                 System.out.print("Digite seu nome: ");
                 String nomeCliente = scanner.nextLine();
                 System.out.print("Digite o valor disponível: R$ ");
                 double saldoCliente = scanner.nextDouble();
-                scanner.nextLine(); // Consumir nova linha
+                scanner.nextLine(); 
 
                 Cliente cliente = new Cliente(1, nomeCliente, "Endereço não especificado", "email@email.com", "000000000");
 
@@ -78,7 +78,7 @@ public class Main {
                             cliente.fazerPedido(pedido, pagamentoPix);
                             pedido.exibirDetalhesPedido();
 
-                            // Exibir detalhes do produto comprado
+                         
                             System.out.println("\n=====================================");
                             System.out.println("          DETALHES DA COMPRA         ");
                             System.out.println("=====================================");
@@ -99,7 +99,7 @@ public class Main {
 
                     System.out.print("Deseja continuar comprando? (S/N): ");
                     char resposta = scanner.next().toUpperCase().charAt(0);
-                    scanner.nextLine(); // Consumir nova linha
+                    scanner.nextLine(); 
                     if (resposta != 'S') {
                         continuarComprando = false;
                     }
@@ -117,7 +117,7 @@ public class Main {
                     System.out.println("5. Sair do programa");
                     System.out.print("Escolha uma opção: ");
                     int opcao = scanner.nextInt();
-                    scanner.nextLine(); // Consumir nova linha
+                    scanner.nextLine(); 
 
                     switch (opcao) {
                         case 1:
