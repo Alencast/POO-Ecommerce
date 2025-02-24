@@ -58,9 +58,3 @@ Ao iniciar o programa, o usuário é apresentado ao menu principal com as opçõ
 ## 🤝 Contribuição
 
 Contribuições são bem-vindas! Sinta-se à vontade para enviar pull requests ou reportar issues para ajudar a melhorar o projeto.
-
-## 📄 Licença
-
-Este projeto está licenciado sob a **Licença MIT**.
-
-Esperamos que este sistema proporcione uma boa experiência de aprendizado e uso. Caso tenha dúvidas ou sugestões, entre em contato!
