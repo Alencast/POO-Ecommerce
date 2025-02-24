@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        
         ArrayList<Produto> produtos = new ArrayList<>();
         produtos.add(new Eletronico(1, "Celular", 1500.00, 10, "Samsung", "Galaxy S21", 24));
         produtos.add(new Eletronico(2, "Notebook", 3000.00, 5, "Dell", "Inspiron 15", 12));
@@ -21,14 +20,24 @@ public class Main {
             System.out.println("=======================================");
             System.out.print("Você é Cliente ou Administrador? (C/A) (X para sair): ");
             char tipoUsuario = scanner.next().toUpperCase().charAt(0);
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             if (tipoUsuario == 'C') {
                 System.out.print("Digite seu nome: ");
                 String nomeCliente = scanner.nextLine();
-                System.out.print("Digite o valor disponível: R$ ");
-                double saldoCliente = scanner.nextDouble();
-                scanner.nextLine(); 
+
+                double saldoCliente = 0;
+                while (true) {
+                    try {
+                        System.out.print("Digite o valor disponível: R$ ");
+                        saldoCliente = scanner.nextDouble();
+                        scanner.nextLine();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Entrada inválida! Digite um número válido.");
+                        scanner.nextLine();
+                    }
+                }
 
                 Cliente cliente = new Cliente(1, nomeCliente, "Endereço não especificado", "email@email.com", "000000000");
 
@@ -45,9 +54,18 @@ public class Main {
                         System.out.println("-------------------------------------");
                     }
 
-                    System.out.print("\nEscolha o ID do produto que você deseja comprar: ");
-                    int idEscolhido = scanner.nextInt();
-                    scanner.nextLine();
+                    int idEscolhido = -1;
+                    while (true) {
+                        try {
+                            System.out.print("\nEscolha o ID do produto que você deseja comprar: ");
+                            idEscolhido = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida! Digite um número válido.");
+                            scanner.nextLine();
+                        }
+                    }
 
                     Produto produtoEscolhido = null;
                     for (Produto produto : produtos) {
@@ -61,9 +79,19 @@ public class Main {
                     if (produtoEscolhido != null) {
                         System.out.println("Produto escolhido: " + produtoEscolhido.getNome());
                         System.out.println("Preço: R$" + produtoEscolhido.getPreco());
-                        System.out.print("Quantidade desejada: ");
-                        int quantidadeCompra = scanner.nextInt();
-                        scanner.nextLine();
+
+                        int quantidadeCompra = 0;
+                        while (true) {
+                            try {
+                                System.out.print("Quantidade desejada: ");
+                                quantidadeCompra = scanner.nextInt();
+                                scanner.nextLine();
+                                break;
+                            } catch (InputMismatchException e) {
+                                System.out.println("Entrada inválida! Digite um número válido.");
+                                scanner.nextLine();
+                            }
+                        }
 
                         if (quantidadeCompra > produtoEscolhido.getQuantidadeEstoque()) {
                             System.out.println("\nQuantidade indisponível em estoque!");
@@ -78,7 +106,6 @@ public class Main {
                             cliente.fazerPedido(pedido, pagamentoPix);
                             pedido.exibirDetalhesPedido();
 
-                         
                             System.out.println("\n=====================================");
                             System.out.println("          DETALHES DA COMPRA         ");
                             System.out.println("=====================================");
@@ -99,7 +126,7 @@ public class Main {
 
                     System.out.print("Deseja continuar comprando? (S/N): ");
                     char resposta = scanner.next().toUpperCase().charAt(0);
-                    scanner.nextLine(); 
+                    scanner.nextLine();
                     if (resposta != 'S') {
                         continuarComprando = false;
                     }
@@ -115,16 +142,38 @@ public class Main {
                     System.out.println("3. Listar Produtos");
                     System.out.println("4. Voltar ao menu principal");
                     System.out.println("5. Sair do programa");
-                    System.out.print("Escolha uma opção: ");
-                    int opcao = scanner.nextInt();
-                    scanner.nextLine(); 
+
+                    int opcao = -1;
+                    while (true) {
+                        try {
+                            System.out.print("Escolha uma opção: ");
+                            opcao = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida! Digite um número válido.");
+                            scanner.nextLine();
+                        }
+                    }
 
                     switch (opcao) {
                         case 1:
                             System.out.print("Digite o nome do produto: ");
                             String nome = scanner.nextLine();
-                            System.out.print("Digite o preço do produto: R$ ");
-                            double preco = scanner.nextDouble();
+
+                            double preco = 0;
+                            while (true) {
+                                try {
+                                    System.out.print("Digite o preço do produto: R$ ");
+                                    preco = scanner.nextDouble();
+                                    scanner.nextLine();
+                                    break;
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Entrada inválida! Digite um número válido.");
+                                    scanner.nextLine();
+                                }
+                            }
+
                             System.out.print("Digite a quantidade em estoque: ");
                             int quantidade = scanner.nextInt();
                             scanner.nextLine();
@@ -175,7 +224,6 @@ public class Main {
                 System.out.println("Opção inválida!");
             }
         }
-
         System.out.println("Encerrando o programa...");
         scanner.close();
     }
