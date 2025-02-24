@@ -1,0 +1,5 @@
+1;Celular;1500.0;10;Samsung;Galaxy S21;24
+2;Notebook;3000.0;4;Dell;Inspiron 15;12
+3;Tablet;1200.0;5;Apple;iPad Air;24
+4;PS5;3500.0;30;Sony;Slim;36
+5;PS5;3500.0;50;Sony;Slim;36

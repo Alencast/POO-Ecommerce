@@ -2,15 +2,23 @@ package app;
 
 import entidades.*;
 import java.util.*;
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Produto> produtos = new ArrayList<>();
-        produtos.add(new Eletronico(1, "Celular", 1500.00, 10, "Samsung", "Galaxy S21", 24));
-        produtos.add(new Eletronico(2, "Notebook", 3000.00, 5, "Dell", "Inspiron 15", 12));
-        produtos.add(new Eletronico(3, "Tablet", 1200.00, 7, "Apple", "iPad Air", 24));
+        // Tenta carregar os clientes já cadastrados do arquivo
+        ArrayList<Cliente> clientes = new ArrayList<>(PersistenciaDados.lerClientes("clientes.txt"));
+        
+        // Tenta carregar os produtos salvos do arquivo
+        ArrayList<Produto> produtos = new ArrayList<>(PersistenciaDados.lerProdutos("produtos.txt"));
+        // Se a lista estiver vazia, cria os produtos padrão
+        if (produtos.isEmpty()) {
+            produtos.add(new Eletronico(1, "Celular", 1500.00, 10, "Samsung", "Galaxy S21", 24));
+            produtos.add(new Eletronico(2, "Notebook", 3000.00, 5, "Dell", "Inspiron 15", 12));
+            produtos.add(new Eletronico(3, "Tablet", 1200.00, 7, "Apple", "iPad Air", 24));
+        }
 
         boolean continuarPrograma = true;
 
@@ -23,8 +31,32 @@ public class Main {
             scanner.nextLine();
 
             if (tipoUsuario == 'C') {
-                System.out.print("Digite seu nome: ");
-                String nomeCliente = scanner.nextLine();
+                Cliente cliente = null;
+                System.out.print("Você já possui cadastro? (S/N): ");
+                char possuiCadastro = scanner.next().toUpperCase().charAt(0);
+                scanner.nextLine();
+
+                if (possuiCadastro == 'S') {
+                    System.out.print("Digite seu email: ");
+                    String email = scanner.nextLine();
+                    // Procura o cliente na lista de clientes carregada
+                    for (Cliente c : clientes) {
+                        if (c.getEmail().equalsIgnoreCase(email)) {
+                            cliente = c;
+                            break;
+                        }
+                    }
+                    if (cliente == null) {
+                        System.out.println("Cadastro não encontrado. Será criado um novo cadastro.");
+                        cliente = criarNovoCliente(scanner, clientes, email);
+                    } else {
+                        System.out.println("Cadastro encontrado. Bem-vindo(a) " + cliente.getNome() + "!");
+                    }
+                } else {
+                    System.out.print("Digite seu email: ");
+                    String email = scanner.nextLine();
+                    cliente = criarNovoCliente(scanner, clientes, email);
+                }
 
                 double saldoCliente = 0;
                 while (true) {
@@ -38,8 +70,6 @@ public class Main {
                         scanner.nextLine();
                     }
                 }
-
-                Cliente cliente = new Cliente(1, nomeCliente, "Endereço não especificado", "email@email.com", "000000000");
 
                 boolean continuarComprando = true;
                 while (continuarComprando) {
@@ -224,7 +254,27 @@ public class Main {
                 System.out.println("Opção inválida!");
             }
         }
+        
+        // Ao final do programa, salva os dados em arquivos TXT
+        PersistenciaDados.salvarProdutos(produtos, "produtos.txt");
+        PersistenciaDados.salvarClientes(clientes, "clientes.txt");
+
         System.out.println("Encerrando o programa...");
         scanner.close();
+    }
+    
+    // Método auxiliar para criar um novo cliente (utilizado quando não há cadastro ou não encontrado)
+    private static Cliente criarNovoCliente(Scanner scanner, ArrayList<Cliente> clientes, String email) {
+        System.out.print("Digite seu nome: ");
+        String nomeCliente = scanner.nextLine();
+        System.out.print("Digite seu endereço: ");
+        String endereco = scanner.nextLine();
+        System.out.print("Digite seu telefone: ");
+        String telefone = scanner.nextLine();
+        // Gera um ID com base no tamanho da lista (pode ser ajustado para outra lógica de ID)
+        Cliente novoCliente = new Cliente(clientes.size() + 1, nomeCliente, endereco, email, telefone);
+        clientes.add(novoCliente);
+        System.out.println("Cadastro realizado com sucesso. Bem-vindo(a) " + nomeCliente + "!");
+        return novoCliente;
     }
 }
