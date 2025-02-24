@@ -29,7 +29,7 @@ public class PersistenciaDados {
         }
     }
 
-    // Método para salvar a lista de clientes em um arquivo TXT
+    
     public static void salvarClientes(List<Cliente> clientes, String nomeArquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
             for (Cliente cliente : clientes) {
@@ -47,12 +47,12 @@ public class PersistenciaDados {
         }
     }
     
-    // Método para ler a lista de clientes de um arquivo TXT
+  
     public static List<Cliente> lerClientes(String nomeArquivo) {
         List<Cliente> clientes = new ArrayList<>();
         File file = new File(nomeArquivo);
         if (!file.exists()) {
-            return clientes; // Retorna lista vazia se o arquivo não existir
+            return clientes; 
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
             String linha;
@@ -74,19 +74,18 @@ public class PersistenciaDados {
         return clientes;
     }
     
-    // Novo método para ler a lista de produtos de um arquivo TXT
+   
     public static List<Produto> lerProdutos(String nomeArquivo) {
         List<Produto> produtos = new ArrayList<>();
         File file = new File(nomeArquivo);
         if (!file.exists()) {
-            return produtos; // Retorna lista vazia se o arquivo não existir
+            return produtos;
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] partes = linha.split(";");
-                // Se o produto for Eletronico, esperamos 7 partes:
-                // 0: id, 1: nome, 2: preco, 3: quantidade, 4: marca, 5: modelo, 6: garantia
+               
                 if (partes.length >= 7) {
                     int id = Integer.parseInt(partes[0]);
                     String nome = partes[1];
@@ -98,7 +97,7 @@ public class PersistenciaDados {
                     Produto produto = new Eletronico(id, nome, preco, quantidade, marca, modelo, garantia);
                     produtos.add(produto);
                 }
-                // Se tiver apenas 4 partes, pode ser outro tipo de produto (ou tratamento específico)
+                
                 else if (partes.length == 4) {
                     int id = Integer.parseInt(partes[0]);
                     String nome = partes[1];

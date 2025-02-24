@@ -11,7 +11,7 @@ public class Main {
         // Tenta carregar os clientes já cadastrados do arquivo
         ArrayList<Cliente> clientes = new ArrayList<>(PersistenciaDados.lerClientes("clientes.txt"));
         
-        // Tenta carregar os produtos salvos do arquivo
+        //  carrega os produtos salvos no txt
         ArrayList<Produto> produtos = new ArrayList<>(PersistenciaDados.lerProdutos("produtos.txt"));
         // Se a lista estiver vazia, cria os produtos padrão
         if (produtos.isEmpty()) {
@@ -263,7 +263,7 @@ public class Main {
         scanner.close();
     }
     
-    // Método auxiliar para criar um novo cliente (utilizado quando não há cadastro ou não encontrado)
+   
     private static Cliente criarNovoCliente(Scanner scanner, ArrayList<Cliente> clientes, String email) {
         System.out.print("Digite seu nome: ");
         String nomeCliente = scanner.nextLine();
@@ -271,7 +271,7 @@ public class Main {
         String endereco = scanner.nextLine();
         System.out.print("Digite seu telefone: ");
         String telefone = scanner.nextLine();
-        // Gera um ID com base no tamanho da lista (pode ser ajustado para outra lógica de ID)
+        
         Cliente novoCliente = new Cliente(clientes.size() + 1, nomeCliente, endereco, email, telefone);
         clientes.add(novoCliente);
         System.out.println("Cadastro realizado com sucesso. Bem-vindo(a) " + nomeCliente + "!");
